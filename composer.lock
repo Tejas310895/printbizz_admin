@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2d41b32b2d315044f59e661bdba6798",
+    "content-hash": "5c1311165cfb4c5ab3c37d447a8e7a74",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -268,6 +268,65 @@
                 "source": "https://github.com/codeigniter4/shield"
             },
             "time": "2024-04-14T08:57:57+00:00"
+        },
+        {
+            "name": "codeigniter4/tasks",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeigniter4/tasks.git",
+                "reference": "7cfd0918765854b68861f9470eff3d8b9e4e537d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeigniter4/tasks/zipball/7cfd0918765854b68861f9470eff3d8b9e4e537d",
+                "reference": "7cfd0918765854b68861f9470eff3d8b9e4e537d",
+                "shasum": ""
+            },
+            "require": {
+                "codeigniter4/settings": "^2.0",
+                "ext-json": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "codeigniter4/devkit": "^1.0",
+                "codeigniter4/framework": "^4.1",
+                "rector/rector": "1.0.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CodeIgniter\\Tasks\\": "src"
+                },
+                "exclude-from-classmap": [
+                    "**/Database/Migrations/**"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lonnie Ezell",
+                    "email": "lonnieje@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Task Scheduler for CodeIgniter 4",
+            "homepage": "https://github.com/codeigniter4/tasks",
+            "keywords": [
+                "codeigniter",
+                "codeigniter4",
+                "cron",
+                "task scheduling"
+            ],
+            "support": {
+                "issues": "https://github.com/codeigniter4/tasks/issues",
+                "source": "https://github.com/codeigniter4/tasks/tree/develop"
+            },
+            "time": "2024-04-06T08:58:00+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
