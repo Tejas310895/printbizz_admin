@@ -7,7 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', 'Home::index');
+$routes->get('/', 'MainController::index');
+$routes->match(['get','post'],'orders-overview', 'OrdersController::index');
 
 service('auth')->routes($routes);
 
