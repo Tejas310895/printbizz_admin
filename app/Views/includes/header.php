@@ -14,7 +14,7 @@
 
 
     <link rel="stylesheet" href="public/css/styles.css">
-    <link rel="stylesheet" href="public/css/extensions/dragula/dragula.min.css">
+    <link rel="stylesheet" href="public/template/extensions/dragula/dragula.min.css">
     <link rel="stylesheet" href="public/template/compiled/css/ui-widgets-todolist.css">
     <link rel="stylesheet" href="public/template/compiled/css/app.css">
     <link rel="stylesheet" href="public/template/compiled/css/app-dark.css">
