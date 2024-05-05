@@ -30,17 +30,6 @@ use App\Models\Orders;
             </div>
     </section>
 </div>
-<div class="partner-select">
-    <select class="choices form-select">
-        <option value="square">Square</option>
-        <option value="rectangle">Rectangle</option>
-        <option value="rombo">Rombo</option>
-        <option value="romboid">Romboid</option>
-        <option value="trapeze">Trapeze</option>
-        <option value="traible">Triangle</option>
-        <option value="polygon">Polygon</option>
-    </select>
-</div>
 
 <script>
     $(document).ready(function() {
@@ -72,10 +61,10 @@ use App\Models\Orders;
                 'last_id': last_id
             },
             success: function(response) {
-                if (response.length > 0) {
+                if ((response.data).length > 0) {
                     loadingshow();
                 }
-                $.each(response, function(iele, vele) {
+                $.each(response.data, function(iele, vele) {
                     var latency = 0;
                     var latency_str = '';
                     var start = new Date(vele.created_at),
@@ -130,13 +119,11 @@ use App\Models\Orders;
                     template += '<div class="col-10 pe-0">';
                     template += '<select class="form-control rounded-0 partner_select">';
                     template += '<option value="" disabled selected>Choose the partner</option>';
-                    template += '<option value="square">Square</option>';
-                    template += '<option value="rectangle">Rectangle</option>';
-                    template += '<option value="rombo">Rombo</option>';
-                    template += '<option value="romboid">Romboid</option>';
-                    template += '<option value="trapeze">Trapeze</option>';
-                    template += '<option value="traible">Triangle</option>';
-                    template += '<option value="polygon">Polygon</option>';
+                    $.each(response.partners, function(pi, pv) {
+                        if ((Object.keys(pv.colleges)).indexOf(vele.college_id) > -1) {
+                            template += '<option value="'+pv.id+'">'+pv.name+'</option>';
+                        }
+                    });
                     template += '</select>';
                     template += '</div>';
                     template += '<div class="col-2 ps-0">';
