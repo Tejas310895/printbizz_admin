@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="public/template/compiled/css/app-dark.css">
     <link rel="stylesheet" href="public/template/compiled/css/iconly.css">
     <link rel="stylesheet" href="public/template/extensions/choices.js/public/assets/styles/choices.css">
+    <link rel="stylesheet" href="public/select2/dist/css/select2.css">
 
     <script src="public/js/jquery.js"></script>
 

@@ -30,6 +30,17 @@ use App\Models\Orders;
             </div>
     </section>
 </div>
+<div class="partner-select">
+    <select class="choices form-select">
+        <option value="square">Square</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="rombo">Rombo</option>
+        <option value="romboid">Romboid</option>
+        <option value="trapeze">Trapeze</option>
+        <option value="traible">Triangle</option>
+        <option value="polygon">Polygon</option>
+    </select>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -117,7 +128,7 @@ use App\Models\Orders;
                     template += '<div class="col-lg-4 col-md-12 mt-2">';
                     template += '<div class="row">';
                     template += '<div class="col-10 pe-0">';
-                    template += '<select class="form-control partner_select">';
+                    template += '<select class="form-control rounded-0 partner_select">';
                     template += '<option value="" disabled selected>Choose the partner</option>';
                     template += '<option value="square">Square</option>';
                     template += '<option value="rectangle">Rectangle</option>';
@@ -138,8 +149,16 @@ use App\Models\Orders;
                     template += '</div>';
                     template += '</div>';
                     template += '</div>';
+                    $('.partner_select').select2({
+                        placeholder: "Choose partner",
+                        width: '100%',
+                    });
+                    $('.select2-selection').css('border-radius', '0px');
+                    $('.select2-selection').css('height', '45px');
+                    $('.select2-selection__arrow').css('padding-top', '41px');
+                    $('.select2-selection__rendered').css('padding-top', '8px');
                     if (search_input.length > 3) {
-                        if (((vele.order_no).toLowerCase()).indexOf(search_input.toLowerCase()) == 0 ||((vele.name).toLowerCase()).indexOf(search_input.toLowerCase()) == 0 ||((vele.secret).toLowerCase()).indexOf(search_input.toLowerCase()) == 0 ) {
+                        if (((vele.order_no).toLowerCase()).indexOf(search_input.toLowerCase()) == 0 || ((vele.name).toLowerCase()).indexOf(search_input.toLowerCase()) == 0 || ((vele.secret).toLowerCase()).indexOf(search_input.toLowerCase()) == 0) {
                             $('#orders_container').append(template);
                         }
                     } else {

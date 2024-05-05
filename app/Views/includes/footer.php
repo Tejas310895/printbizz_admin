@@ -13,6 +13,7 @@
 <script src="public/template/extensions/apexcharts/apexcharts.min.js"></script>
 <script src="public/template/static/js/pages/dashboard.js"></script>
 <script src="public/template/extensions/choices.js/public/assets/scripts/choices.js"></script>
+<script src="public/select2/dist/js/select2.js"></script>
 <script src="public/template/static/js/pages/form-element-select.js"></script>
 <script src="public/js/loading.js"></script>
 
