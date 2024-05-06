@@ -136,7 +136,7 @@ use App\Models\Orders;
                     template += '</div>';
                     template += '</div>';
                     template += '</div>';
-                    $('.partner_select').select2({
+                    $('select.partner_select').select2({
                         placeholder: "Choose partner",
                         width: '100%',
                     });
