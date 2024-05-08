@@ -28,7 +28,7 @@
                 <?php foreach ($menu as $name => $list) :
                     if (!is_array($list)) :
                 ?>
-                        <li class="<?= url_is($list) ? 'active open' : '' ?>"><a href="index.html">
+                        <li class="<?= url_is($list) ? 'active open' : '' ?>"><a href="<?=$list?>">
                                 <i class="zmdi zmdi-home"></i>
                                 <span><?= ucwords($name) ?></span></a>
                         </li>
