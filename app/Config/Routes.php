@@ -8,7 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 
 
 $routes->get('/', 'MainController::index');
-$routes->match(['get','post'],'orders-overview', 'OrdersController::index');
+$routes->match(['get', 'post'], 'orders-overview', 'OrdersController::index');
+$routes->match(['get', 'post'], 'products-overview', 'ProductsController::index');
 
 service('auth')->routes($routes);
 

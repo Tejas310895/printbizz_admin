@@ -11,6 +11,9 @@ class MenuLibrary
             'dashboard' => '/',
             'orders' => [
                 'overview' => 'orders-overview'
+            ],
+            'products' => [
+                'overview' => 'products-overview'
             ]
         ];
 
