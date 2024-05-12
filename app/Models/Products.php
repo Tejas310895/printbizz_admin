@@ -6,12 +6,19 @@ use CodeIgniter\Model;
 
 class Products extends Model
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+
+    public static $status = [
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    ];
     protected $table      = 'products';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
 
-    protected $returnType     = 'array';
+    protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
     protected $allowedFields = ['name', 'type', 'default_price', 'itemnary', 'img', 'status', 'created_by', 'updated_by'];

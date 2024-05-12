@@ -10,10 +10,11 @@ class MenuLibrary
         $list = [
             'dashboard' => '/',
             'orders' => [
-                'overview' => 'orders-overview'
+                'overview' => 'orders-index'
             ],
             'products' => [
-                'overview' => 'products-overview'
+                'Products' => 'products-index',
+                'Itemnary' => 'products-itemnary',
             ]
         ];
 

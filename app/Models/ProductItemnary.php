@@ -6,6 +6,8 @@ use CodeIgniter\Model;
 
 class ProductItemnary extends Model
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
     protected $table      = 'products_itemnary';
     protected $primaryKey = 'id';
 
@@ -14,7 +16,7 @@ class ProductItemnary extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name', 'type', 'icons', 'price', 'status', 'created_by', 'updated_by'];
+    protected $allowedFields = ['name', 'item_group_id', 'type', 'icons', 'price', 'status', 'created_by', 'updated_by'];
 
     // Dates
     protected $useTimestamps = false;
@@ -31,4 +33,9 @@ class ProductItemnary extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
+
+    public function Itemnary($id)
+    {
+        return $this->where('item_group_id', $id)->findAll();
+    }
 }

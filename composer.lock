@@ -4,8 +4,89 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b9a6459717d395e1ad86d34dd513ece",
+    "content-hash": "044c1f0b15f51755333add986cfb7f4d",
     "packages": [
+        {
+            "name": "4spacesdk/ci4debugtool",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/4spacesdk/CI4DebugTool.git",
+                "reference": "f91c1429de616037248e2cf5d63d9e00945bbc41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/4spacesdk/CI4DebugTool/zipball/f91c1429de616037248e2cf5d63d9e00945bbc41",
+                "reference": "f91c1429de616037248e2cf5d63d9e00945bbc41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DebugTool\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hansen",
+                    "email": "martin@4spaces.dk"
+                }
+            ],
+            "description": "Debug Tool for CodeIgniter 4",
+            "support": {
+                "issues": "https://github.com/4spacesdk/CI4DebugTool/issues",
+                "source": "https://github.com/4spacesdk/CI4DebugTool/tree/master"
+            },
+            "time": "2019-11-02T11:03:24+00:00"
+        },
+        {
+            "name": "4spacesdk/ci4ormextension",
+            "version": "v1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/4spacesdk/CI4OrmExtension.git",
+                "reference": "dabde1cc46d1d7bb2cce3c556e896c5ae2186f63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/4spacesdk/CI4OrmExtension/zipball/dabde1cc46d1d7bb2cce3c556e896c5ae2186f63",
+                "reference": "dabde1cc46d1d7bb2cce3c556e896c5ae2186f63",
+                "shasum": ""
+            },
+            "require": {
+                "4spacesdk/ci4debugtool": ">=1.0.0",
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OrmExtension\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hansen",
+                    "email": "martin@4spaces.dk"
+                }
+            ],
+            "description": "ORM Extension for CodeIgniter 4",
+            "support": {
+                "issues": "https://github.com/4spacesdk/CI4OrmExtension/issues",
+                "source": "https://github.com/4spacesdk/CI4OrmExtension/tree/v1.0.9"
+            },
+            "time": "2024-02-01T08:10:16+00:00"
+        },
         {
             "name": "codeigniter4/framework",
             "version": "v4.5.1",

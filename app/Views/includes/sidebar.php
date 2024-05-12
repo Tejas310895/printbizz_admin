@@ -1,16 +1,16 @@
-    <!-- Left Sidebar -->
+<!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a href="index.html"><img src="public/lab_themes/assets/images/logo.svg" width="25" alt="Aero"><span class="m-l-10">Aero</span></a>
+            <a href="index.html"><img src="https://pngimg.com/uploads/symbol_infinity/symbol_infinity_PNG35.png" width="25" alt="Aero"><span class="m-l-10">Infinity</span></a>
         </div>
         <div class="menu">
             <ul class="list">
                 <li>
                     <div class="user-info">
-                        <a class="image" href="profile.html"><img src="public/lab_themes/assets/images/profile_av.jpg" alt="User"></a>
+                        <a class="image" href="profile.html"><img src="<?=base_url()?>public/lab_themes/assets/images/profile_av.jpg" alt="User"></a>
                         <div class="detail">
-                            <h4>Michael</h4>
+                            <h4>Akash</h4>
                             <small>Super Admin</small>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 <?php foreach ($menu as $name => $list) :
                     if (!is_array($list)) :
                 ?>
-                        <li class="<?= url_is($list) ? 'active open' : '' ?>"><a href="index.html">
+                        <li class="<?= url_is($list) ? 'active open' : '' ?>"><a href="<?= base_url().$list ?>">
                                 <i class="zmdi zmdi-home"></i>
                                 <span><?= ucwords($name) ?></span></a>
                         </li>
@@ -36,7 +36,7 @@
                         <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span><?= ucwords($name) ?></span></a>
                             <ul class="ml-menu">
                                 <?php foreach ($list as $sub_name => $sub_link) : ?>
-                                    <li><a href="<?= $sub_link ?>"><?= ucwords($sub_name) ?></a></li>
+                                    <li><a href="<?= base_url().$sub_link ?>"><?= ucwords($sub_name) ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>

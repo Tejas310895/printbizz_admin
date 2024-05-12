@@ -6,6 +6,20 @@ use CodeIgniter\Model;
 
 class ProductItemnaryGroup extends Model
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+
+    const TYPE_SINGLE_SELECT = 1;
+    const TYPE_MULTI_SELECT = 2;
+
+    public static $status = [
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    ];
+    public static $types = [
+        self::TYPE_SINGLE_SELECT => 'Mandatory',
+        self::TYPE_MULTI_SELECT => 'Optional',
+    ];
     protected $table      = 'products_itemnary_group';
     protected $primaryKey = 'id';
 
@@ -31,4 +45,23 @@ class ProductItemnaryGroup extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
+
+    public function ItemnaryGroup($ids = null)
+    {
+        $groups = [];
+        if ($ids == null) {
+            foreach ($this->asArray()->findAll() as $value) {
+                $itemnaryModel = new \App\Models\ProductItemnary();
+                $value['items'] = $itemnaryModel->Itemnary($value['id']);
+                array_push($groups, $value);
+            }
+        } else {
+            foreach ($this->asArray()->whereIn('id', $ids)->findAll() as $value) {
+                $itemnaryModel = new \App\Models\ProductItemnary();
+                $value['items'] = $itemnaryModel->Itemnary($value['id']);
+                array_push($groups, $value);
+            }
+        }
+        return $groups;
+    }
 }

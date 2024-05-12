@@ -11,6 +11,7 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
+        "4spacesdk/ci4ormextension": "^1.0",
         "codeigniter4/framework": "^4.4",
         "codeigniter4/queue": "dev-develop",
         "codeigniter4/shield": "^1.0",

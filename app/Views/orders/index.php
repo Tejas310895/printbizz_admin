@@ -5,7 +5,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h2>Orders list</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Aero</a></li>
+                        <li class="breadcrumb-item"><a href=""><i class="zmdi zmdi-home"></i> Home</a></li>
                         <li class="breadcrumb-item">Project</li>
                         <li class="breadcrumb-item active">list</li>
                     </ul>
@@ -13,7 +13,6 @@
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
-                    <button class="btn btn-success btn-icon float-right" type="button"><i class="zmdi zmdi-plus"></i></button>
                 </div>
             </div>
         </div>
@@ -28,9 +27,9 @@
                                         <th style="width:50px;">Name</th>
                                         <th></th>
                                         <th></th>
-                                        <th class="hidden-md-down">Assigned</th>
-                                        <th class="hidden-md-down" width="150px">Status</th>
-                                        <th>Due Date</th>
+                                        <th data-breakpoints="sm xs md" class="hidden-md-down">Assigned</th>
+                                        <th data-breakpoints="sm xs md" class="hidden-md-down" width="150px">Status</th>
+                                        <th data-breakpoints="sm xs md" >Order Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,9 +37,33 @@
                                     foreach ($data as $order) : ?>
                                         <tr>
                                             <td>
-                                                <div class="icon xl-amber text-center rounded ">
-                                                    <h5 class="p-1 m-b-0">15</h5>
-                                                    <small>MINUTES</small>
+                                                <?php
+
+                                                $d1 = strtotime(date('Y-m-d H:i:s'));
+                                                $d2 = strtotime($order['created_at']);
+                                                $diffInSeconds = abs($d1 - $d2); //42600225
+                                                $diffInMinutes = $diffInSeconds / 60; //710003.75
+                                                $diffInHours   = $diffInSeconds / 60 / 60; //11833.39
+                                                $diffInDays    = $diffInSeconds / 60 / 60 / 24; //493.05
+
+                                                if ($diffInSeconds < 60) {
+                                                    $latency = $diffInSeconds;
+                                                    $latency_str = 'SECONDS';
+                                                } else if ($diffInMinutes < 60) {
+                                                    $latency = $diffInMinutes;
+                                                    $latency_str = 'MINUTES';
+                                                } else if ($diffInHours < 24) {
+                                                    $latency = $diffInHours;
+                                                    $latency_str = 'HOURS';
+                                                } else {
+                                                    $latency = $diffInDays;
+                                                    $latency_str = 'DAYS';
+                                                }
+
+                                                ?>
+                                                <div class="icon xl-pink text-center rounded ">
+                                                    <h5 class="p-1 m-b-0"><?= round($latency) ?></h5>
+                                                    <small><?= $latency_str ?></small>
                                                 </div>
                                             </td>
                                             <td>
@@ -57,28 +80,31 @@
                                                 <td>
                                                     <select class="form-control show-tick ms" data-placeholder="Select">
                                                         <option disabled selected value="">Choose Partner</option>
-                                                        <option>Mustard</option>
-                                                        <option>Ketchup</option>
-                                                        <option>Relish</option>
+                                                        <?php foreach ($partners as $partner) :
+                                                            if (in_array($order['college_id'], array_keys($partner['colleges']))) :
+                                                        ?>
+                                                                <option value="<?= $partner['id'] ?>"><?= $partner['name'] ?></option>
+                                                            <?php endif; ?>
+                                                        <?php endforeach ?>
                                                     </select>
                                                 </td>
                                             <?php endif ?>
                                             <td class="hidden-md-down">
                                                 <span class="col-green"><?= \App\Models\Orders::$status[$order['status']] ?></span>
                                             </td>
-                                            <td>25 Dec 2019</td>
+                                            <td><?=date('d M Y',strtotime($order['created_at']))?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>
                         </div>
-                        <ul class="pagination pagination-primary mt-4">
+                        <!-- <ul class="pagination pagination-primary mt-4">
                             <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
                             <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
                             <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
                             <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
                             <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

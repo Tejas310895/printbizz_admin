@@ -3,9 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\PartnerDetails;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Shield\Models\UserIdentityModel;
-use CodeIgniter\Shield\Models\UserModel;
 
 class OrdersController extends BaseController
 {
@@ -44,6 +41,6 @@ class OrdersController extends BaseController
         }
         $data['data'] = $data;
         $data['partners'] = $partners;
-        return $this->render_page('orders', $data);
+        return $this->render_page('orders/index', $data);
     }
 }
