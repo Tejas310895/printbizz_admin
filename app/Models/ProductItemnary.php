@@ -36,6 +36,6 @@ class ProductItemnary extends Model
 
     public function Itemnary($id)
     {
-        return $this->where('item_group_id', $id)->findAll();
+        return $this->where('item_group_id', $id)->where('status', self::STATUS_ACTIVE)->findAll();
     }
 }

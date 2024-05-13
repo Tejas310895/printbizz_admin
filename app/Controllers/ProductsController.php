@@ -22,6 +22,10 @@ class ProductsController extends BaseController
     {
         $postdata = $this->request->getPost();
         if (!empty($postdata)) {
+            if (isset($postdata['edit_id'])) {
+                $edit_group = $this->itemnary_group->ItemnaryGroup([$postdata['edit_id']]);
+                return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => array_shift($edit_group)]);
+            }
             $status = 1;
             try {
                 $group_arr = [
@@ -29,8 +33,12 @@ class ProductsController extends BaseController
                     'type' => $postdata['type'],
                     'status' => ModelsPartnerDetails::STATUS_ACTIVE
                 ];
+                if (isset($postdata['id'])) {
+                    $this->itemnary->where('item_group_id', $postdata['id'])->set(['status' => ProductItemnary::STATUS_INACTIVE])->update();
+                    $group_arr['id'] = $postdata['id'];
+                }
                 if ($this->itemnary_group->save($group_arr)) {
-                    $group_id = $this->itemnary_group->getInsertID();
+                    $group_id = (isset($postdata['id'])) ? $postdata['id'] : $this->itemnary_group->getInsertID();
                     foreach ($postdata as $key => $value) {
                         if (strpos($key, 'group_items') !== false) {
                             $sub_arr = json_decode($value, true);
@@ -44,6 +52,7 @@ class ProductsController extends BaseController
                     $status = 0;
                 }
             } catch (\Exception $e) {
+                echo $e;
             }
             return $this->response->setJSON(['csrf' => csrf_hash(), 'status' => $status]);
         }

@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
-                    <button href="products-view" class="btn btn-success btn-icon float-right" data-toggle="modal" data-target="#largeModal" type="button"><i class="zmdi zmdi-plus"></i></button>
+                    <button href="products-view" class="btn btn-success btn-icon float-right" onclick="open_modal()" type="button"><i class="zmdi zmdi-plus"></i></button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                                             <td><span class="text-muted"> Total <?= count($group['items']) ?> Sub Itemnaries</span></td>
                                             <td><span class="<?= (($group['status'] == ProductItemnaryGroup::STATUS_ACTIVE) ? 'col-green' : 'col-red') ?>"><?= ProductItemnaryGroup::$status[$group['status']] ?></span></td>
                                             <td>
-                                                <a href="" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>
+                                                <button onclick="open_modal(<?= $group['id'] ?>)" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></button>
                                                 <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
                                             </td>
                                         </tr>
@@ -73,10 +73,11 @@
 </section>
 
 <!-- Large Size -->
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="itemnaryModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <?= form_open('', ['id' => "form_validation_stats", 'onsubmit' => 'submit_group($(this));return false;']); ?>
+            <?= form_open('', ['id' => "group_form", 'onsubmit' => 'submit_group($(this));return false;']); ?>
+            <input type="hidden" name="id" disabled>
             <div class="modal-header">
                 <h4 class="title" id="largeModalLabel">Add New Itemnary</h4>
             </div>
@@ -146,7 +147,6 @@
         var name = item_body.find('#item_name');
         name.removeClass('form-control-danger');
         price.removeClass('form-control-danger');
-        console.log((name.val()).length + (price.val()).length);
         if ((name.val()).length > 1 && (price.val()).length > 0) {
             var item_json = JSON.stringify({
                 'name': name.val(),
@@ -159,6 +159,8 @@
             template += '<span class="badge badge-primary badge-pill" onclick="delete_sub_itemnary($(this))">x</span>';
             template += '</li>';
             $('.list-group').append(template);
+            name.val('');
+            price.val('');
         } else {
             name.addClass('form-control-danger');
             price.addClass('form-control-danger');
@@ -201,5 +203,52 @@
             element.find('#item_name').addClass('form-control-danger');
         }
 
+    }
+
+    function open_modal(id = null) {
+        if (id == null) {
+            console.log('hi');
+            var edit_body = $('#itemnaryModal');
+            edit_body.find('input[name="name"]').val('');
+            edit_body.find('select[name="type"]').val('').change();
+            edit_body.find('input[name="id"]').val('');
+            edit_body.find('input[name="id"]').attr('disabled', 'disabled');
+            $('.list-group').empty();
+            $('#itemnaryModal').modal('show');
+        } else {
+            $.ajax({
+                type: "post",
+                url: window.location.href,
+                data: {
+                    'csrf_test_name': $('input[name="csrf_test_name"]').val(),
+                    'edit_id': id
+                },
+                success: function(response) {
+                    var edit_body = $('#itemnaryModal');
+                    var groups_data = response.data;
+                    console.log(groups_data.name);
+                    edit_body.find('input[name="name"]').val(groups_data.name);
+                    edit_body.find('select[name="type"]').val(groups_data.type).change();
+                    edit_body.find('input[name="id"]').removeAttr('disabled');
+                    edit_body.find('input[name="id"]').val(groups_data.id);
+                    $('.list-group').empty();
+                    $.each(groups_data.items, function(iti, itv) {
+                        var edit_item_json = JSON.stringify({
+                            'name': itv.name,
+                            'price': itv.price,
+                        });
+                        var template = '';
+                        template += '<li class="list-group-item d-flex justify-content-between align-items-center">';
+                        template += '<input type="hidden" name="group_items[]" value=\'' + edit_item_json + '\'>';
+                        template += itv.name + ' for ₹' + itv.price;
+                        template += '<span class="badge badge-primary badge-pill" onclick="delete_sub_itemnary($(this))">x</span>';
+                        template += '</li>';
+                        $('.list-group').append(template);
+                    });
+                    $('input[name="csrf_test_name"]').val(response.csrf);
+                    $('#itemnaryModal').modal('show');
+                }
+            });
+        }
     }
 </script>
