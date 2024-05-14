@@ -1,3 +1,8 @@
+<?php
+
+use App\Models\ProductItemnaryGroup;
+
+?>
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
@@ -21,37 +26,8 @@
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-hover product_item_list c_table theme-color mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Group Name</th>
-                                        <th data-breakpoints="sm xs">Detail</th>
-                                        <th data-breakpoints="xs md">Status</th>
-                                        <th data-breakpoints="sm xs md">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
+                        <div class="table-responsive" id="itemnary_body">
 
-                                    use App\Models\ProductItemnaryGroup;
-
-                                    foreach ($groups as $group) : ?>
-                                        <tr>
-                                            <!-- <td><img src="public/lab_themes/assets/images/ecommerce/1.png" width="48" alt="Product img"></td> -->
-                                            <td>
-                                                <h5><?= $group['name'] ?></h5>
-                                            </td>
-                                            <td><span class="text-muted"> Total <?= count($group['items']) ?> Sub Itemnaries</span></td>
-                                            <td><span class="<?= (($group['status'] == ProductItemnaryGroup::STATUS_ACTIVE) ? 'col-green' : 'col-red') ?>"><?= ProductItemnaryGroup::$status[$group['status']] ?></span></td>
-                                            <td>
-                                                <button onclick="open_modal(<?= $group['id'] ?>)" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></button>
-                                                <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                     <!-- <div class="card">
@@ -251,4 +227,74 @@
             });
         }
     }
+
+    function delete_itemnary(id) {
+        $.ajax({
+            type: "post",
+            url: window.location.href,
+            data: {
+                'csrf_test_name': $('input[name="csrf_test_name"]').val(),
+                'delete_id': id
+            },
+            success: function(response) {
+                if (response.status == 1) {
+                    showNotification('bg-green', 'Deleted Successfully', 'top', 'right', '', '');
+                } else {
+                    showNotification('bg-red', 'Failed !Try Again', 'top', 'right', '', '');
+                }
+                $('input[name="csrf_test_name"]').val(response.csrf);
+            }
+        });
+    }
+
+    function fetch_data() {
+        $pre_temp = '';
+        $pre_temp += '<button class="btn btn-info" type="button" disabled>';
+        $pre_temp += '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>';
+        $pre_temp += '<span role="status">Loading...</span>';
+        $pre_temp += '</button>';
+        $('#itemnary_body').html($pre_temp);
+        $.ajax({
+            type: "post",
+            url: window.location.href,
+            data: {
+                'csrf_test_name': $('input[name="csrf_test_name"]').val(),
+                'fetch_data': '1'
+            },
+            success: function(response) {
+                $post_temp = '';
+                $post_temp += '<table class="table table-hover product_item_list c_table theme-color mb-0">';
+                $post_temp += '<thead>';
+                $post_temp += '<tr>';
+                $post_temp += '<th>Group Name</th>';
+                $post_temp += '<th data-breakpoints="sm xs">Detail</th>';
+                $post_temp += '<th data-breakpoints="xs md">Status</th>';
+                $post_temp += '<th data-breakpoints="sm xs md">Action</th>';
+                $post_temp += '</tr>';
+                $post_temp += '</thead>';
+                $post_temp += '<tbody>';
+
+                $.each(response.data, function(itmi, itmv) {
+                    $post_temp += '<tr>';
+                    $post_temp += '<td>' + itmv.name + '</td>';
+                    $post_temp += '<td><span class="text-muted">' + (itmv.items).length + 'Sub Itemnaries</span></td>';
+                    $post_temp += '<td><span class="' + ((itmv.status == 1) ? "col-green" : "col-red") + '">' + ((itmv.status == 1) ? "Active" : "Inactive") + '</span></td>';
+                    $post_temp += '<td>';
+                    $post_temp += '<button onclick="open_modal(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></button>'
+                    if (itmv.status == <?= ProductItemnaryGroup::STATUS_ACTIVE ?>) {
+                        $post_temp += '<button onclick="delete_itemnary(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></button>';
+                    }
+                    $post_temp += '</td>';
+                    $post_temp += '</tr>';
+                });
+                $post_temp += '</tbody>';
+                $post_temp += '</table>';
+                $('#itemnary_body').html($post_temp);
+                $('input[name="csrf_test_name"]').val(response.csrf);
+            }
+        });
+    }
+    $(document).ready(function() {
+        fetch_data();
+    });
 </script>

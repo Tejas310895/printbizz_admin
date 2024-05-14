@@ -50,13 +50,13 @@ class ProductItemnaryGroup extends Model
     {
         $groups = [];
         if ($ids == null) {
-            foreach ($this->asArray()->findAll() as $value) {
+            foreach ($this->where('status',self::STATUS_ACTIVE)->orderBy('id DESC')->asArray()->findAll() as $value) {
                 $itemnaryModel = new \App\Models\ProductItemnary();
                 $value['items'] = $itemnaryModel->Itemnary($value['id']);
                 array_push($groups, $value);
             }
         } else {
-            foreach ($this->asArray()->whereIn('id', $ids)->findAll() as $value) {
+            foreach ($this->asArray()->whereIn('id', $ids)->where('status',self::STATUS_ACTIVE)->orderBy('id DESC')->findAll() as $value) {
                 $itemnaryModel = new \App\Models\ProductItemnary();
                 $value['items'] = $itemnaryModel->Itemnary($value['id']);
                 array_push($groups, $value);

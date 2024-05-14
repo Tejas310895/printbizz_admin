@@ -26,6 +26,19 @@ class ProductsController extends BaseController
                 $edit_group = $this->itemnary_group->ItemnaryGroup([$postdata['edit_id']]);
                 return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => array_shift($edit_group)]);
             }
+            if (isset($postdata['delete_id'])) {
+                try {
+                    $this->itemnary->where('item_group_id', $postdata['delete_id'])->set(['status' => ProductItemnary::STATUS_INACTIVE])->update();
+                    $this->itemnary_group->where('id', $postdata['delete_id'])->set(['status' => ProductItemnary::STATUS_INACTIVE])->update();
+                    return $this->response->setJSON(['csrf' => csrf_hash(), 'status' => 1]);
+                } catch (\Throwable $e) {
+                    return $this->response->setJSON(['csrf' => csrf_hash(), 'status' => $e]);
+                }
+            }
+            if (isset($postdata['fetch_data'])) {
+                $data_g = $this->itemnary_group->ItemnaryGroup();
+                return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => $data_g]);
+            }
             $status = 1;
             try {
                 $group_arr = [
