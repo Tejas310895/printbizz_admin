@@ -4,18 +4,66 @@ namespace App\Controllers;
 
 use App\Models\PartnerDetails as ModelsPartnerDetails;
 use App\Models\ProductItemnary;
+use App\Models\Products;
 
 class ProductsController extends BaseController
 {
     public function index()
     {
-        $products = $this->products->asArray()->findAll();
-        $data['products'] = [];
-        foreach ($products as $product) {
-            $product['groups'] = $this->itemnary_group->ItemnaryGroup(json_decode($product['itemnary'], true));
-            array_push($data['products'], $product);
+        $postdata = $this->request->getPost();
+        if ($postdata) {
+            if (isset($postdata['fetch_data'])) {
+                $data['products'] = [];
+                $products = $this->products->asArray()->findAll();
+                $data['groups'] = $this->itemnary_group->ItemnaryGroup();
+                foreach ($products as $product) {
+                    $product['groups'] = $this->itemnary_group->ItemnaryGroup(json_decode($product['itemnary'], true));
+                    array_push($data['products'], $product);
+                }
+                return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => $data]);
+            }
+            if (isset($postdata['edit_id'])) {
+                $data = array_shift($this->products->asArray()->where('id', $postdata['edit_id'])->find());
+                $data['itemnary'] = json_decode($data['itemnary']);
+                return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => $data]);
+            }
+            if (isset($postdata['submit_product'])) {
+                try {
+                    unset($postdata['submit_product']);
+                    if ($this->request->getFile('img')->getSize() > 0) {
+                        $img = $this->request->getFile('img');
+                        $newName = $img->getRandomName();
+                        if (!$img->hasMoved()) {
+                            $filepath = 'uploads/' . $img->store('admin_img/' . date('Ymd'), $newName);
+                            $postdata['img'] = json_encode([$filepath]);
+                            $status = 1;
+                        } else {
+                            $status = 0;
+                        }
+                    } else {
+                        $status = 1;
+                    }
+                    if ($status == 1) {
+                        $postdata['itemnary'] = array_map('intval', $postdata['itemnary']);
+                        $postdata['itemnary'] = json_encode($postdata['itemnary']);
+                        $postdata['status'] = Products::STATUS_ACTIVE;
+                        $postdata['created_by'] = (auth()->user()) ? auth()->user()->id : null;
+                        $postdata['updated_by'] = (auth()->user()) ? auth()->user()->id : null;
+                        if ($this->products->save($postdata)) {
+                            $status = 1;
+                        } else {
+                            unlink(WRITEPATH . $filepath);
+                            $status = 0;
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    echo $e;
+                    $status = 0;
+                }
+                return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => $status]);
+            }
         }
-        return $this->render_page('products/index', $data);
+        return $this->render_page('products/index');
     }
 
     public function itemnary()

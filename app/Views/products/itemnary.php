@@ -172,6 +172,7 @@ use App\Models\ProductItemnaryGroup;
                         showNotification('bg-red', 'Failed !Try Again', 'top', 'right', '', '');
                     }
                     $('input[name="csrf_test_name"]').val(response.csrf);
+                    fetch_data();
                 }
             });
         } else {
@@ -186,6 +187,7 @@ use App\Models\ProductItemnaryGroup;
             console.log('hi');
             var edit_body = $('#itemnaryModal');
             edit_body.find('input[name="name"]').val('');
+            edit_body.find('#largeModalLabel').text('Add New Itemnary');
             edit_body.find('select[name="type"]').val('').change();
             edit_body.find('input[name="id"]').val('');
             edit_body.find('input[name="id"]').attr('disabled', 'disabled');
@@ -204,6 +206,7 @@ use App\Models\ProductItemnaryGroup;
                     var groups_data = response.data;
                     console.log(groups_data.name);
                     edit_body.find('input[name="name"]').val(groups_data.name);
+                    edit_body.find('#largeModalLabel').text('Edit Itemnary');
                     edit_body.find('select[name="type"]').val(groups_data.type).change();
                     edit_body.find('input[name="id"]').removeAttr('disabled');
                     edit_body.find('input[name="id"]').val(groups_data.id);
