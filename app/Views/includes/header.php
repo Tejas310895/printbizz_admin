@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/public/lab_themes/assets/plugins/select2/select2.css" />
     <link rel="stylesheet" href="<?= base_url() ?>/public/lab_themes/assets/plugins/dropify/css/dropify.min.css" />
     <!-- Jquery Core Js -->
-    <script src="<?= base_url() ?>public/lab_themes/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="<?= base_url() ?>public/lab_themes/assets/bundles/libscripts.bundle.js"></script> .<!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
     <script src="<?= base_url() ?>public/lab_themes/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
 
     <script src="<?= base_url() ?>public/lab_themes/assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
@@ -46,8 +46,6 @@
 
     <script src="<?= base_url() ?>public/lab_themes/assets/bundles/mainscripts.bundle.js"></script>
     <script src="<?= base_url() ?>public/lab_themes/assets/js/pages/index.js"></script>
-
-    <script src="<?= base_url() ?>public/lab_themes/assets/bundles/footable.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 
     <script src="<?= base_url() ?>public/lab_themes/assets/js/pages/tables/footable.js"></script><!-- Custom Js -->
     <script src="<?= base_url() ?>public/lab_themes/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> <!-- Bootstrap Colorpicker Js -->

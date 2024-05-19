@@ -293,6 +293,7 @@ use App\Models\ProductItemnaryGroup;
                 $post_temp += '</tbody>';
                 $post_temp += '</table>';
                 $('#itemnary_body').html($post_temp);
+                $('.product_item_list').footable();
                 $('input[name="csrf_test_name"]').val(response.csrf);
             }
         });

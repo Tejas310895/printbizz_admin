@@ -19,17 +19,17 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="card project_list">
+                    <div class="card">
                         <div class="table-responsive">
                             <table class="table table-hover c_table theme-color">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px;">Name</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th style="width:50px;">Duration</th>
+                                        <th>Name</th>
+                                        <th>Order No</th>
                                         <th data-breakpoints="sm xs md" class="hidden-md-down">Assigned</th>
                                         <th data-breakpoints="sm xs md" class="hidden-md-down" width="150px">Status</th>
-                                        <th data-breakpoints="sm xs md" >Order Date</th>
+                                        <th data-breakpoints="sm xs md">Order Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +92,7 @@
                                             <td class="hidden-md-down">
                                                 <span class="col-green"><?= \App\Models\Orders::$status[$order['status']] ?></span>
                                             </td>
-                                            <td><?=date('d M Y',strtotime($order['created_at']))?></td>
+                                            <td><?= date('d M Y', strtotime($order['created_at'])) ?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 </tbody>

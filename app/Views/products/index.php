@@ -23,9 +23,9 @@ use App\Models\ProductItemnaryGroup;
         </div>
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="table-responsive" id="itemnary_body">
+                <div class="col-lg-12" id="itemnary_body">
+                <div class="card">
+                        <div class="table-responsive">
 
                         </div>
                     </div>
@@ -170,7 +170,7 @@ use App\Models\ProductItemnaryGroup;
         }
     }
 
-    function delete_itemnary(id) {
+    function delete_product(id) {
         $.ajax({
             type: "post",
             url: window.location.href,
@@ -185,6 +185,7 @@ use App\Models\ProductItemnaryGroup;
                     showNotification('bg-red', 'Failed !Try Again', 'top', 'right', '', '');
                 }
                 $('input[name="csrf_test_name"]').val(response.csrf);
+                fetch_data();
             }
         });
     }
@@ -206,13 +207,15 @@ use App\Models\ProductItemnaryGroup;
             },
             success: function(response) {
                 post_temp = '';
-                post_temp += '<table class="table table-hover product_item_list c_table theme-color mb-0">';
+                post_temp = '<div class="card project_list">';
+                post_temp = '<div class="table-responsive">';
+                post_temp += '<table class="table table-hover product_item_list c_table theme-color">';
                 post_temp += '<thead>';
                 post_temp += '<tr>';
                 post_temp += '<th>Image</th>';
-                post_temp += '<th data-breakpoints="sm xs">Product Name</th>';
+                post_temp += '<th>Product Name</th>';
                 post_temp += '<th data-breakpoints="sm xs">Detail</th>';
-                post_temp += '<th data-breakpoints="sm xs">Amount</th>';
+                post_temp += '<th data-breakpoints="xs">Amount</th>';
                 post_temp += '<th data-breakpoints="xs md">Status</th>';
                 post_temp += '<th data-breakpoints="sm xs md">Action</th>';
                 post_temp += '</tr>';
@@ -229,19 +232,22 @@ use App\Models\ProductItemnaryGroup;
                     post_temp += '<td>';
                     post_temp += '<button onclick="open_modal(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></button>'
                     if (itmv.status == <?= ProductItemnaryGroup::STATUS_ACTIVE ?>) {
-                        post_temp += '<button onclick="delete_itemnary(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></button>';
+                        post_temp += '<button onclick="delete_product(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-red"><i class="zmdi zmdi-delete"></i></button>';
                     }
                     post_temp += '</td>';
                     post_temp += '</tr>';
                 });
                 post_temp += '</tbody>';
                 post_temp += '</table>';
+                post_temp += '</div>';
+                post_temp += '</div>';
                 $('#itemnary_body').html(post_temp);
                 $('#itemnary_select').empty();
                 $.each(response.data.groups, function(itgi, itgv) {
                     $('#itemnary_select').append('<option value="' + itgv.id + '">' + itgv.name + '</option>');
                 });
                 $('#itemnary_select').selectpicker('refresh');
+                $('.product_item_list').footable();
                 $('input[name="csrf_test_name"]').val(response.csrf);
             }
         });

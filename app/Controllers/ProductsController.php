@@ -14,7 +14,7 @@ class ProductsController extends BaseController
         if ($postdata) {
             if (isset($postdata['fetch_data'])) {
                 $data['products'] = [];
-                $products = $this->products->asArray()->findAll();
+            $products = $this->products->asArray()->where('status' , Products::STATUS_ACTIVE)->findAll();
                 $data['groups'] = $this->itemnary_group->ItemnaryGroup();
                 foreach ($products as $product) {
                     $product['groups'] = $this->itemnary_group->ItemnaryGroup(json_decode($product['itemnary'], true));
@@ -26,6 +26,14 @@ class ProductsController extends BaseController
                 $data = array_shift($this->products->asArray()->where('id', $postdata['edit_id'])->find());
                 $data['itemnary'] = json_decode($data['itemnary']);
                 return $this->response->setJSON(['csrf' => csrf_hash(), 'data' => $data]);
+            }
+            if (isset($postdata['delete_id'])) {
+                try {
+                    $this->products->where('id', $postdata['delete_id'])->set(['status' => Products::STATUS_INACTIVE])->update();
+                    return $this->response->setJSON(['csrf' => csrf_hash(), 'status' => 1]);
+                } catch (\Throwable $e) {
+                    return $this->response->setJSON(['csrf' => csrf_hash(), 'status' => $e]);
+                }
             }
             if (isset($postdata['submit_product'])) {
                 try {
