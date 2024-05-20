@@ -46,4 +46,18 @@ class Orders extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
+
+    public function getCustomerOrders($user_id = null)
+    {
+        if ($user_id != null) {
+            return $this->where(['user_id' => $user_id, 'status' => Orders::STATUS_ORDER_DELIVERED])->findAll();
+        } else {
+            $orders_list = $this->findAll();
+            $orders_list = array_reduce($orders_list, function ($carry, $val) {
+                $carry[$val['user_id']][$val['status']][] = $val;
+                return $carry;
+            });
+            return $orders_list;
+        }
+    }
 }

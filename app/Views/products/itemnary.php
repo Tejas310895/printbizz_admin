@@ -280,7 +280,7 @@ use App\Models\ProductItemnaryGroup;
                 $.each(response.data, function(itmi, itmv) {
                     $post_temp += '<tr>';
                     $post_temp += '<td>' + itmv.name + '</td>';
-                    $post_temp += '<td><span class="text-muted">' + (itmv.items).length + 'Sub Itemnaries</span></td>';
+                    $post_temp += '<td><span class="text-muted">' + (itmv.items).length + ' Sub Itemnaries</span></td>';
                     $post_temp += '<td><span class="' + ((itmv.status == 1) ? "col-green" : "col-red") + '">' + ((itmv.status == 1) ? "Active" : "Inactive") + '</span></td>';
                     $post_temp += '<td>';
                     $post_temp += '<button onclick="open_modal(' + itmv.id + ')" class="btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></button>'
