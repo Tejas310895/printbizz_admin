@@ -62,6 +62,7 @@
     <script src="<?= base_url() ?>public/lab_themes/assets/js/pages/forms/dropify.js"></script>
     <script src="<?= base_url() ?>public/lab_themes/assets/plugins/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="<?= base_url() ?>public/lab_themes/assets/js/pages/ui/notifications.js"></script>
+    <script src="<?= base_url() ?>public/lab_themes/assets/bundles/footable.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 </head>
 
 <body class="theme-blush">

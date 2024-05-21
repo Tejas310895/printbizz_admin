@@ -21,7 +21,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="table-responsive">
-                            <table class="table table-hover c_table theme-color">
+                            <table class="table table-hover product_item_list c_table theme-color">
                                 <thead>
                                     <tr>
                                         <th style="width:50px;">Duration</th>
@@ -70,7 +70,7 @@
                                                 <a class="single-user-name" href="javascript:void(0);"><?= ucwords($order['name']) ?></a><br>
                                                 <small><?= $order['secret'] ?></small>
                                             </td>
-                                            <td>
+                                            <td class="hidden-md-down">
                                                 <strong><?= $order['order_no'] ?></strong><br>
                                                 <small> <strong>Amount: ₹<?= $order['tot_price'] ?></strong> </small>
                                             </td>
@@ -89,7 +89,7 @@
                                                     </select>
                                                 </td>
                                             <?php endif ?>
-                                            <td class="hidden-md-down">
+                                            <td>
                                                 <span class="col-green"><?= \App\Models\Orders::$status[$order['status']] ?></span>
                                             </td>
                                             <td><?= date('d M Y', strtotime($order['created_at'])) ?></td>
