@@ -16,8 +16,11 @@ class MenuLibrary
                 'Products' => 'products-index',
                 'Itemnary' => 'products-itemnary',
             ],
-            'Customers' => [
+            'customers' => [
                 'List' => 'customers-index',
+            ],
+            'institutions' => [
+                'List' => 'institutions-index',
             ]
         ];
 

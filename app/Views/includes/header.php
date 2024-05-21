@@ -36,6 +36,7 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= base_url() ?>/public/lab_themes/assets/plugins/select2/select2.css" />
     <link rel="stylesheet" href="<?= base_url() ?>/public/lab_themes/assets/plugins/dropify/css/dropify.min.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>/public/lab_themes/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
     <!-- Jquery Core Js -->
     <script src="<?= base_url() ?>public/lab_themes/assets/bundles/libscripts.bundle.js"></script> .<!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
     <script src="<?= base_url() ?>public/lab_themes/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->

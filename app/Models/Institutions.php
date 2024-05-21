@@ -6,6 +6,13 @@ use CodeIgniter\Model;
 
 class Institutions extends Model
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+
+    public static $status = [
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+    ];
     protected $table      = 'institutions';
     protected $primaryKey = 'id';
 
