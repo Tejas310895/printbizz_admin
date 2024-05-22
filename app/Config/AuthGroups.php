@@ -61,6 +61,10 @@ class AuthGroups extends ShieldAuthGroups
             'title'       => 'Beta User',
             'description' => 'Has access to beta-level features.',
         ],
+        'partner' => [
+            'title'       => 'Partner Client',
+            'description' => 'These are the vendors',
+        ],
     ];
 
     /**

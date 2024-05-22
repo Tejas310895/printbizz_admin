@@ -13,6 +13,7 @@ $routes->match(['get', 'post'], 'products-index', 'ProductsController::index');
 $routes->match(['get', 'post'], 'products-itemnary', 'ProductsController::itemnary');
 $routes->match(['get', 'post'], 'customers-index', 'CustomersController::index');
 $routes->match(['get', 'post'], 'institutions-index', 'InstitutionsController::index');
+$routes->match(['get', 'post'], 'partners-index', 'PartnersController::index');
 
 service('auth')->routes($routes);
 

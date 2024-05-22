@@ -21,6 +21,9 @@ class MenuLibrary
             ],
             'institutions' => [
                 'List' => 'institutions-index',
+            ],
+            'Partners' => [
+                'List' => 'partners-index',
             ]
         ];
 
