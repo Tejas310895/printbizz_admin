@@ -180,7 +180,11 @@
     function open_modal(id = null) {
         if (id == null) {
             var edit_body = $('#itemnaryModal');
-            edit_body.find('input').val('');
+            edit_body.find('input').each(function(i, v) {
+                if ($(this).attr('name') != 'csrf_test_name') {
+                    $(this).val('');
+                }
+            });
             edit_body.find('select[name="college_assigned_id[]"]').selectpicker('deselectAll');
             edit_body.find('input[name="id"]').attr('disabled', 'disabled');
             $('#itemnaryModal').modal('show');
