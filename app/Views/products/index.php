@@ -24,7 +24,7 @@ use App\Models\ProductItemnaryGroup;
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12" id="itemnary_body">
-                <div class="card">
+                    <div class="card">
                         <div class="table-responsive">
 
                         </div>
