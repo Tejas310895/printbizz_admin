@@ -14,6 +14,7 @@ $routes->group('', ['filter' => ['session', \App\Filters\AccessFilter::class]], 
     $routes->match(['get', 'post'], 'customers-index', 'CustomersController::index');
     $routes->match(['get', 'post'], 'institutions-index', 'InstitutionsController::index');
     $routes->match(['get', 'post'], 'partners-index', 'PartnersController::index');
+    $routes->match(['get', 'post'], 'settings', 'SettingsController::index');
 });
 
 service('auth')->routes($routes);
