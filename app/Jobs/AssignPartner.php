@@ -20,7 +20,7 @@ class AssignPartner extends BaseJob implements JobInterface
                     'partner_id' => $value['id']
                 ];
                 $get_order_obj->update([$this->data['order_id']], $upd_arr);
-                break;
+                return true;
             } else {
                 continue;
             }

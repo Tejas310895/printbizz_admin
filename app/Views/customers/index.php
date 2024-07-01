@@ -18,6 +18,11 @@
         </div>
         <div class="container-fluid">
             <div class="row clearfix">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search your products" onchange="search($(this),$('.customer_table'),'.c_name')" />
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="table-responsive">
@@ -29,7 +34,7 @@
                                         <th data-breakpoints="xs sm md">Orders</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="customer_table">
                                     <?php
 
                                     use App\Models\Orders;
@@ -38,10 +43,10 @@
                                         <?php if (empty($customers->groups)) : ?>
                                             <tr>
                                                 <td>
-                                                    <p class="c_name"><?= $customers->identities[0]->name ?></p>
+                                                    <p class="c_name"><?= (isset($customers->getEmailIdentity()->name)) ? $customers->getEmailIdentity()->name : null ?></p>
                                                 </td>
                                                 <td>
-                                                    <span class="phone"><i class="zmdi zmdi-whatsapp mr-2"></i><?= $customers->identities[0]->secret ?></span>
+                                                    <span class="phone"><i class="zmdi zmdi-whatsapp mr-2"></i><?= (isset($customers->getEmailIdentity()->secret)) ? $customers->getEmailIdentity()->secret : null ?></span>
                                                 </td>
                                                 <td>
                                                     <?php

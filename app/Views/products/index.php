@@ -23,6 +23,11 @@ use App\Models\ProductItemnaryGroup;
         </div>
         <div class="container-fluid">
             <div class="row clearfix">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search your products" onchange="search($(this),$('.products_table'),'#product_name')" />
+                    </div>
+                </div>
                 <div class="col-lg-12" id="itemnary_body">
                     <div class="card">
                         <div class="table-responsive">
@@ -220,12 +225,12 @@ use App\Models\ProductItemnaryGroup;
                 post_temp += '<th data-breakpoints="sm xs md">Action</th>';
                 post_temp += '</tr>';
                 post_temp += '</thead>';
-                post_temp += '<tbody>';
+                post_temp += '<tbody class="products_table">';
 
                 $.each(response.data.products, function(itmi, itmv) {
                     post_temp += '<tr>';
                     post_temp += '<td><img src="writable/' + JSON.parse(itmv.img)[0] + '" width="48" alt="Product img"></td>';
-                    post_temp += '<td>' + itmv.name + '</td>';
+                    post_temp += '<td id="product_name">' + itmv.name + '</td>';
                     post_temp += '<td><span class="text-muted">' + (itmv.groups).length + ' Main Itemnaries</span></td>';
                     post_temp += '<td>' + itmv.default_price + '</td>';
                     post_temp += '<td><span class="' + ((itmv.status == 1) ? "col-green" : "col-red") + '">' + ((itmv.status == 1) ? "Active" : "Inactive") + '</span></td>';

@@ -20,6 +20,11 @@
             <div class="row clearfix">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search your products" onchange="search($(this),$('.orders_table'),'#order_no')" />
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover product_item_list c_table theme-color">
                                 <thead>
@@ -32,7 +37,7 @@
                                         <th data-breakpoints="sm xs md">Order Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="orders_table">
                                     <?php
                                     foreach ($data as $order) : ?>
                                         <tr>
@@ -71,7 +76,7 @@
                                                 <small><?= $order['secret'] ?></small>
                                             </td>
                                             <td class="hidden-md-down">
-                                                <strong><?= $order['order_no'] ?></strong><br>
+                                                <strong id="order_no"><?= $order['order_no'] ?></strong><br>
                                                 <small> <strong>Amount: ₹<?= $order['tot_price'] ?></strong> </small>
                                             </td>
                                             <?php if ($order['partner_id'] != null) : ?>
@@ -111,3 +116,4 @@
         </div>
     </div>
 </section>
+

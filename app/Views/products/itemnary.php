@@ -24,6 +24,11 @@ use App\Models\ProductItemnaryGroup;
         </div>
         <div class="container-fluid">
             <div class="row clearfix">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search your products" onchange="search($(this),$('.itemnary_table'),'#itemnary_name')" />
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="table-responsive" id="itemnary_body">
@@ -275,11 +280,11 @@ use App\Models\ProductItemnaryGroup;
                 $post_temp += '<th data-breakpoints="sm xs md">Action</th>';
                 $post_temp += '</tr>';
                 $post_temp += '</thead>';
-                $post_temp += '<tbody>';
+                $post_temp += '<tbody class="itemnary_table">';
 
                 $.each(response.data, function(itmi, itmv) {
                     $post_temp += '<tr>';
-                    $post_temp += '<td>' + itmv.name + '</td>';
+                    $post_temp += '<td id="itemnary_name">' + itmv.name + '</td>';
                     $post_temp += '<td><span class="text-muted">' + (itmv.items).length + ' Sub Itemnaries</span></td>';
                     $post_temp += '<td><span class="' + ((itmv.status == 1) ? "col-green" : "col-red") + '">' + ((itmv.status == 1) ? "Active" : "Inactive") + '</span></td>';
                     $post_temp += '<td>';

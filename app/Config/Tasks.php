@@ -45,6 +45,7 @@ class Tasks extends BaseTasks
      */
     public function init(Scheduler $schedule)
     {
-        $schedule->command('queue:work assign_partners')->everyMinute();
+        $schedule->command('queue:work assign_partners --stop-when-empty')->everyMinute();
+        $schedule->command('queue:work complaint_mail --stop-when-empty')->everyMinute();
     }
 }
