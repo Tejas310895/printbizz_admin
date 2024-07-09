@@ -24,6 +24,9 @@ class MenuLibrary
             ],
             'Partners' => [
                 'List' => 'partners-index',
+            ],
+            'Coupon' => [
+                'List' => 'coupon-index',
             ]
         ];
 

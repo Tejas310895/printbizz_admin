@@ -63,6 +63,7 @@ abstract class BaseController extends Controller
         $this->itemnary = new \App\Models\ProductItemnary();
         $this->institutes = new \App\Models\Institutions();
         $this->partner_details = new \App\Models\PartnerDetails();
+        $this->coupons = new \App\Models\Coupon();
         $this->orders = new \App\Models\Orders();
         $this->users = new UserModel();
         $this->userIdentities = new UserIdentityModel();
